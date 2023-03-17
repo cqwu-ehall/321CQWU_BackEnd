@@ -14,14 +14,12 @@ async def get_score(client: Client):
     return {"code": 0, "msg": "查询成功", "data": score}
 
 
-
 async def get_score_cache(username: int, fake_password: str):
     real_user = await UserAction.get_user_by_username(username=username)
     if check := await check_user_fake_password(real_user, fake_password):
         return check
     client = await get_client(real_user)
     return await get_score(client)
-
 
 
 @app.post("/get_scores")
@@ -37,4 +35,4 @@ async def get_scores(user: ApiUser):
     try:
         return await get_score(client)
     except Exception as e:
-        return {"code": 1, "msg": type(e)}
+        return {"code": 1, "msg": str(type(e))}

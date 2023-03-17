@@ -27,4 +27,4 @@ async def epay_balance(user: ApiUser):
     try:
         return await get_balance(client)
     except Exception as e:
-        return {"code": 1, "msg": type(e)}
+        return {"code": 1, "msg": str(type(e))}

@@ -13,6 +13,8 @@ def listener(**args_):
         async def handler(*args, **kwargs):
             client: Client = args[0]
             need_login = False
+            if web_vpn and not client.web_ehall_path:
+                need_login = True
             for i in range(2):
                 try:
                     if need_login:
