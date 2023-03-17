@@ -1,5 +1,6 @@
 from cqwu import Client
 from cqwu.errors import UsernameOrPasswordError, CookieError, NeedCaptchaError
+from httpx import ConnectTimeout
 
 
 def listener(**args_):
@@ -15,7 +16,7 @@ def listener(**args_):
             need_login = False
             if web_vpn and not client.web_ehall_path:
                 need_login = True
-            for i in range(2):
+            for i in range(3):
                 try:
                     if need_login:
                         await client.login_with_password()
@@ -27,9 +28,12 @@ def listener(**args_):
                 except NeedCaptchaError:
                     return {"code": 1, "msg": "需要验证码，请尝试重新登录"}
                 except CookieError:
-                    if i == 1:
+                    if i == 2:
                         return {"code": 1, "msg": "自动登录失败，请尝试重新登录"}
                     need_login = True
+                except ConnectTimeout:
+                    if i == 2:
+                        return {"code": 1, "msg": "连接超时，请重试"}
 
         return handler
 

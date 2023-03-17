@@ -30,7 +30,7 @@ async def send_success_message(open_id: str):
 
 
 async def run_background_task(user: User, open_id: str):
-    client = await get_client(user)
+    client = await get_client(user, timeout=60)
     try:
         data = await get_calendar(client)
     except Exception as e:
