@@ -22,8 +22,7 @@ async def get_calendar(client: Client):
 
 
 async def send_fail_message(open_id: str, msg: str):
-    await send_task_success_message(open_id, "Refresh_Calendar", "更新失败")
-    # await send_task_fail_message(open_id, "Refresh_Calendar", "更新失败", msg)
+    await send_task_fail_message(open_id, "Refresh_Calendar", "更新失败", msg)
 
 
 async def send_success_message(open_id: str):
