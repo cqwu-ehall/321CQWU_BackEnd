@@ -22,11 +22,11 @@ async def get_calendar(client: Client):
 
 
 async def send_fail_message(open_id: str, msg: str):
-    await send_task_message(open_id, "更新课表", f"更新失败，{msg}")
+    await send_task_message(open_id, "Refresh_Calendar", f"更新失败，{msg}")
 
 
 async def send_success_message(open_id: str):
-    await send_task_message(open_id, "更新课表", "更新成功，请前往小程序同步课表")
+    await send_task_message(open_id, "Refresh_Calendar", "课表更新成功，请前往小程序同步课表到本地")
 
 
 async def run_background_task(user: User, open_id: str):

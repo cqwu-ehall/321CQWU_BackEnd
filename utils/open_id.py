@@ -1,5 +1,3 @@
-import json
-
 from httpx import AsyncClient
 from datetime import datetime
 from settings import APP_ID, APP_SECRET, TASK_TEMPLATE_ID
