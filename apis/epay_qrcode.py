@@ -33,4 +33,4 @@ async def epay_qrcode(user: ApiUser):
     try:
         return await gen_pay_qrcode(client)
     except Exception as e:
-        return {"code": 1, "msg": str(type(e))}
+        return {"code": 1, "msg": e.__class__.__name__}

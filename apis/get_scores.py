@@ -35,4 +35,4 @@ async def get_scores(user: ApiUser):
     try:
         return await get_score(client)
     except Exception as e:
-        return {"code": 1, "msg": str(type(e))}
+        return {"code": 1, "msg": e.__class__.__name__}

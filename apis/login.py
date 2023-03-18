@@ -29,5 +29,5 @@ async def login(user: User):
     except NeedCaptchaError:
         return {"code": 1, "msg": "需要验证码"}
     except Exception as e:
-        return {"code": 1, "msg": str(type(e))}
+        return {"code": 1, "msg": e.__class__.__name__}
     return {"code": 0, "msg": "登录成功"}

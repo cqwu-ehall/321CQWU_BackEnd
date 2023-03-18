@@ -22,7 +22,7 @@ async def get_calendar(client: Client):
 
 
 async def send_fail_message(open_id: str, msg: str):
-    await send_task_message(open_id, "Refresh_Calendar", f"更新失败，{msg}")
+    await send_task_message(open_id, "Refresh_Calendar", f"课表更新失败，{msg}")
 
 
 async def send_success_message(open_id: str):
@@ -30,11 +30,12 @@ async def send_success_message(open_id: str):
 
 
 async def run_background_task(user: User, open_id: str):
-    client = await get_client(user, timeout=30)
+    client = None
     try:
+        client = await get_client(user, timeout=60)
         data = await get_calendar(client)
     except Exception as e:
-        data = {"code": 1, "msg": str(type(e))}
+        data = {"code": 1, "msg": e.__class__.__name__}
     if data.get("code") != 0:
         return await send_fail_message(open_id, data.get("msg"))
     courses: List[AiCourse] = data.get("data")
